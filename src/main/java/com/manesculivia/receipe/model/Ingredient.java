@@ -13,8 +13,8 @@ public class Ingredient {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private Integer id;
 
-    private int quantity;
+    private Integer quantity;
 
 }

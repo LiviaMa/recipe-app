@@ -14,14 +14,14 @@ public class Recipe {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private Integer id;
 
     private String name;
 
     @Enumerated(EnumType.STRING)
     private RecipeType type;
 
-    private int cookingTime;
+    private Integer cookingTime;
 
     @Enumerated(EnumType.STRING)
     private RecipeDifficulty difficulty;
