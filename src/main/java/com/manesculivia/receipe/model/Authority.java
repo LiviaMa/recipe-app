@@ -20,6 +20,4 @@ public class Authority {
     @Enumerated(EnumType.STRING)
     private RoleType roleType;
 
-    @ManyToMany(mappedBy = "authorities", fetch = FetchType.LAZY)
-    private List<User> users;
 }

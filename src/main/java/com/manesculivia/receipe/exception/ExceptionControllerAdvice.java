@@ -20,4 +20,9 @@ public class ExceptionControllerAdvice {
         return new ResponseEntity<>(e.getMessage(), NOT_FOUND);
     }
 
+    @ExceptionHandler(UsernameAlreadyExistsException.class)
+    public ResponseEntity<String> handle(UsernameAlreadyExistsException e) {
+        return new ResponseEntity<>(e.getMessage(), BAD_REQUEST);
+    }
+
 }
