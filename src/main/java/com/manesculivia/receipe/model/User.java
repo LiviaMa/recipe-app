@@ -27,15 +27,15 @@ public class User implements UserDetails {
     private String password;
 
     @ManyToMany(fetch = FetchType.EAGER)
-    @JoinTable(name = "users_authorities",
+    @JoinTable(name = "users_roles",
             joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "id"),
-            inverseJoinColumns = @JoinColumn(name = "authority_id", referencedColumnName = "id"))
-    private List<Authority> authorities = new ArrayList<>();
+            inverseJoinColumns = @JoinColumn(name = "role_id", referencedColumnName = "id"))
+    private List<Role> authorities = new ArrayList<>();
 
     @Override
     public List<GrantedAuthority> getAuthorities() {
         return authorities.stream()
-                .map(authority -> new SimpleGrantedAuthority(authority.getRoleType().name()))
+                .map(role -> new SimpleGrantedAuthority(role.getName()))
                 .collect(toList());
     }
 

@@ -26,16 +26,17 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity httpSecurity) throws Exception {
-
         httpSecurity
+                .httpBasic()
+                .and()
                 .csrf()
                 .disable()
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 .and()
                 .authorizeRequests()
-                .antMatchers(new String[]{"/ingredients/**",
-                        "/users/**"})
-                .permitAll()
+                .mvcMatchers("/users/**").permitAll()
+                // TODO to be changed
+                .mvcMatchers("/ingredients/**").hasRole("ADMIN")
                 .anyRequest().authenticated();
     }
 

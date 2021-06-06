@@ -29,8 +29,8 @@ public class UserController {
     }
 
     @PostMapping(value = "/register", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<UserResponseDto> createCookUser(@Valid @RequestBody UserRequestDto userRequestDto) {
-        User user = userService.createUser(userRequestDto, userRequestDto.getRoleType());
+    public ResponseEntity<UserResponseDto> registerUser(@Valid @RequestBody UserRequestDto userRequestDto) {
+        User user = userService.createUser(userRequestDto, userRequestDto.getRole());
         return new ResponseEntity<>(from(user), CREATED);
     }
 

@@ -1,11 +1,10 @@
 package com.manesculivia.receipe.service;
 
 import com.manesculivia.receipe.exception.UsernameAlreadyExistsException;
-import com.manesculivia.receipe.model.Authority;
-import com.manesculivia.receipe.model.RoleType;
+import com.manesculivia.receipe.model.Role;
 import com.manesculivia.receipe.model.User;
 import com.manesculivia.receipe.model.request.UserRequestDto;
-import com.manesculivia.receipe.repository.AuthorityRepository;
+import com.manesculivia.receipe.repository.RoleRepository;
 import com.manesculivia.receipe.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -22,7 +21,7 @@ import static java.util.Collections.singletonList;
 public class UserService implements UserDetailsService {
 
     private final UserRepository userRepository;
-    private final AuthorityRepository authorityRepository;
+    private final RoleRepository roleRepository;
     private final PasswordEncoder passwordEncoder;
 
     @Override
@@ -31,7 +30,7 @@ public class UserService implements UserDetailsService {
                 .orElseThrow(() -> new UsernameNotFoundException(format("Not found user with username {0}", username)));
     }
 
-    public User createUser(UserRequestDto userRequestDto, RoleType roleType) {
+    public User createUser(UserRequestDto userRequestDto, String roleName) {
         String username = userRequestDto.getUsername();
         if (userRepository.findByUsername(username).isPresent()) {
             throw new UsernameAlreadyExistsException(format("{0} is already used", username));
@@ -39,8 +38,8 @@ public class UserService implements UserDetailsService {
         User user = new User();
         user.setUsername(username);
         user.setPassword(passwordEncoder.encode(userRequestDto.getPassword()));
-        Authority authority = authorityRepository.findByRoleType(roleType);
-        user.setAuthorities(singletonList(authority));
+        Role role = roleRepository.findRoleByName(roleName);
+        user.setAuthorities(singletonList(role));
 
         return userRepository.save(user);
     }

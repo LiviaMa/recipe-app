@@ -1,11 +1,11 @@
-INSERT INTO authorities (id, role_type)
-VALUES (1,'ADMIN')
-ON DUPLICATE KEY UPDATE role_type = role_type;
+INSERT INTO roles (id, name)
+VALUES (1,'ROLE_ADMIN')
+ON DUPLICATE KEY UPDATE name = name;
 
-INSERT INTO authorities (id, role_type)
-VALUES (2,'COOK')
-ON DUPLICATE KEY UPDATE role_type = role_type;
+INSERT INTO roles (id, name)
+VALUES (2,'ROLE_COOK')
+ON DUPLICATE KEY UPDATE name = name;
 
-INSERT INTO authorities (id, role_type)
-VALUES (3,'BASIC_USER')
-ON DUPLICATE KEY UPDATE role_type = role_type;
+INSERT INTO roles (id, name)
+VALUES (3,'ROLE_BASIC_USER')
+ON DUPLICATE KEY UPDATE name = name;

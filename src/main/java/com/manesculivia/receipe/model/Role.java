@@ -4,20 +4,17 @@ import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
-import java.util.List;
 
 @Entity
-@Table(name = "authorities")
+@Table(name = "roles")
 @Getter
 @Setter
-public class Authority {
+public class Role {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @Column(name="role_type", length = 15)
-    @Enumerated(EnumType.STRING)
-    private RoleType roleType;
+    private String name;
 
 }
