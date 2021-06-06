@@ -3,12 +3,14 @@ package com.manesculivia.receipe.model.response;
 import com.manesculivia.receipe.model.User;
 import lombok.Getter;
 import lombok.Setter;
+import lombok.ToString;
 import org.springframework.security.core.GrantedAuthority;
 
 import static java.util.stream.Collectors.joining;
 
 @Getter
 @Setter
+@ToString
 public class UserResponseDto {
 
     private String username;

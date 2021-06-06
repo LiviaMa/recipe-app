@@ -25,4 +25,9 @@ public class ExceptionControllerAdvice {
         return new ResponseEntity<>(e.getMessage(), BAD_REQUEST);
     }
 
+    @ExceptionHandler(UserRoleNotSupportedException.class)
+    public ResponseEntity<String> handle(UserRoleNotSupportedException e) {
+        return new ResponseEntity<>(e.getMessage(), BAD_REQUEST);
+    }
+
 }

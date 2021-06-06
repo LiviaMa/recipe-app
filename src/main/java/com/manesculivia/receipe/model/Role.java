@@ -2,6 +2,7 @@ package com.manesculivia.receipe.model;
 
 import lombok.Getter;
 import lombok.Setter;
+import lombok.ToString;
 
 import javax.persistence.*;
 
@@ -9,6 +10,7 @@ import javax.persistence.*;
 @Table(name = "roles")
 @Getter
 @Setter
+@ToString(exclude = "id")
 public class Role {
 
     @Id

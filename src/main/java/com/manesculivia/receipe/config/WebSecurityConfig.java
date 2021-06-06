@@ -36,7 +36,9 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .authorizeRequests()
                 .mvcMatchers("/users/**").permitAll()
                 // TODO to be changed
-                .mvcMatchers("/ingredients/**").hasRole("ADMIN")
+//                .mvcMatchers("/ingredients/**").hasRole("ADMIN")))
+                .mvcMatchers("pantry/ingredients/**").permitAll()
+                .mvcMatchers("/recipes/**").permitAll()
                 .anyRequest().authenticated();
     }
 

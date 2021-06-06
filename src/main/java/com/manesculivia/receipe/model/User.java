@@ -2,6 +2,7 @@ package com.manesculivia.receipe.model;
 
 import lombok.Getter;
 import lombok.Setter;
+import lombok.ToString;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -16,6 +17,7 @@ import static java.util.stream.Collectors.toList;
 @Table(name = "users")
 @Getter
 @Setter
+@ToString(exclude = "id")
 public class User implements UserDetails {
 
     @Id
