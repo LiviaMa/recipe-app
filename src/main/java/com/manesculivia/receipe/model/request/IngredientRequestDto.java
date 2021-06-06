@@ -1,12 +1,13 @@
 package com.manesculivia.receipe.model.request;
 
-import com.manesculivia.receipe.model.Ingredient;
 import lombok.Getter;
+import lombok.ToString;
 
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Positive;
 
 @Getter
+@ToString
 public class IngredientRequestDto {
 
     @NotBlank

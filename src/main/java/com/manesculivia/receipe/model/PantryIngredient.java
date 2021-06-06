@@ -8,19 +8,22 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Positive;
 
 @Entity
-@Table(name = "ingredients")
+@Table(name = "pantry_ingredients")
 @Getter
 @Setter
-public class Ingredient {
+public class PantryIngredient {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+    @Column(name = "ingredient_id")
+    private Integer ingredientId;
 
     @NotBlank
-    private String name;
+    @Column(name = "ingredient_name")
+    private String ingredientName;
 
     @Positive
-    private Integer quantity;
+    @Column(name = "ingredient_quantity")
+    private Integer ingredientQuantity;
 
 }
