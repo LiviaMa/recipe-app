@@ -11,4 +11,6 @@ public interface PantryRepository extends JpaRepository<PantryIngredient, Intege
 
     Optional<PantryIngredient> findByIngredientNameIgnoreCaseAndIngredientQuantityLessThanEqual(String name, Integer quantity);
 
+    Optional<PantryIngredient> findByIngredientNameIgnoreCase(String name);
+
 }

@@ -30,9 +30,17 @@ public class PantryService {
     }
 
     public PantryIngredient add(IngredientRequestDto ingredientRequestDto) {
-        PantryIngredient pantryIngredient = new PantryIngredient();
-        pantryIngredient.setIngredientName(ingredientRequestDto.getName());
-        pantryIngredient.setIngredientQuantity(ingredientRequestDto.getQuantity());
+        Optional<PantryIngredient> optionalIngredient = pantryRepository.findByIngredientNameIgnoreCase(ingredientRequestDto.getName());
+        PantryIngredient pantryIngredient;
+        if (optionalIngredient.isPresent()) {
+            pantryIngredient = optionalIngredient.get();
+            int updatedQuantity = ingredientRequestDto.getQuantity() + pantryIngredient.getIngredientQuantity();
+            pantryIngredient.setIngredientQuantity(updatedQuantity);
+        } else {
+            pantryIngredient = new PantryIngredient();
+            pantryIngredient.setIngredientName(ingredientRequestDto.getName());
+            pantryIngredient.setIngredientQuantity(ingredientRequestDto.getQuantity());
+        }
         return pantryRepository.save(pantryIngredient);
     }
 

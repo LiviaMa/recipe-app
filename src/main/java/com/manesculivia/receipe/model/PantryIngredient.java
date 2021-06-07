@@ -19,7 +19,7 @@ public class PantryIngredient {
     private Integer ingredientId;
 
     @NotBlank
-    @Column(name = "ingredient_name")
+    @Column(name = "ingredient_name", unique = true)
     private String ingredientName;
 
     @Positive
