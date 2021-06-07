@@ -9,7 +9,7 @@ import java.util.List;
 @Table(name = "recipes")
 @Getter
 @Setter
-@Builder
+@Builder(toBuilder = true)
 @AllArgsConstructor
 @NoArgsConstructor
 @ToString(exclude = "id")
