@@ -31,6 +31,7 @@ public class Recipe {
 
     private String createdBy;
 
+    // TODO fix delete operation on private recipe
     @ManyToMany(cascade = CascadeType.ALL)
     @JoinTable(name = "recipes_recipe_ingredients",
             joinColumns = @JoinColumn(name = "recipe_id", referencedColumnName = "id"),

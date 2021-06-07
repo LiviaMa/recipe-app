@@ -32,11 +32,11 @@ public class User implements UserDetails {
     @JoinTable(name = "users_roles",
             joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "id"),
             inverseJoinColumns = @JoinColumn(name = "role_id", referencedColumnName = "id"))
-    private List<Role> authorities = new ArrayList<>();
+    private List<Role> roles = new ArrayList<>();
 
     @Override
     public List<GrantedAuthority> getAuthorities() {
-        return authorities.stream()
+        return roles.stream()
                 .map(role -> new SimpleGrantedAuthority(role.getName()))
                 .collect(toList());
     }

@@ -16,22 +16,24 @@ public interface RecipeRepository extends JpaRepository<Recipe, Integer> {
     List<Recipe> findAllByCreatedByIgnoreCase(String createdBy);
 
     List<Recipe> findAllByTypeAndNameIgnoreCaseAndCookingTimeAndDifficulty(
-            String name, Integer cookingTime, String difficulty);
+            String type, String name, Integer cookingTime, String difficulty);
 
-    List<Recipe> findAllByTypeAndNameIgnoreCaseAndCookingTime(String name, Integer cookingTime);
+    List<Recipe> findAllByTypeAndNameIgnoreCaseAndCookingTime(String type, String name, Integer cookingTime);
 
-    List<Recipe> findAllByTypeAndNameIgnoreCaseAndDifficulty(String name, String difficulty);
+    List<Recipe> findAllByTypeAndNameIgnoreCaseAndDifficulty(String type, String name, String difficulty);
 
-    List<Recipe> findAllByTypeAndCookingTimeAndDifficulty(Integer cookingTime, String difficulty);
+    List<Recipe> findAllByTypeAndCookingTimeAndDifficulty(String type, Integer cookingTime, String difficulty);
 
-    List<Recipe> findAllByTypeAndNameIgnoreCase(String name);
+    List<Recipe> findAllByTypeAndNameIgnoreCase(String type, String name);
 
-    List<Recipe> findAllByTypeAndCookingTime(Integer cookingTime);
+    List<Recipe> findAllByTypeAndCookingTime(String type, Integer cookingTime);
 
-    List<Recipe> findAllByTypeAndDifficulty(String difficulty);
+    List<Recipe> findAllByTypeAndDifficulty(String type, String difficulty);
 
-    Optional<Recipe> findByIdAndTypeIgnoreCaseAndCreatedByIgnoreCase(Integer id, String type, String createdBy);
+    Optional<Recipe> findByIdAndTypeAndCreatedByIgnoreCase(Integer id, RecipeType type, String createdBy);
 
-    void deleteByIdAndRecipeType(Integer id, String type);
+    Optional<Recipe> findByTypeAndNameIgnoreCase(RecipeType type, String name);
+
+    void deleteByIdAndType(Integer id, RecipeType type);
 
 }

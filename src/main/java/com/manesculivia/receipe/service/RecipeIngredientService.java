@@ -18,7 +18,7 @@ public class RecipeIngredientService {
         recipeIngredient.setQuantity(ingredient.getQuantity());
 
         return recipeIngredientRepository.findByNameIgnoreCaseAndQuantity(ingredient.getName(), ingredient.getQuantity())
-                .orElse(recipeIngredientRepository.save(recipeIngredient));
+                .orElseGet(() -> recipeIngredientRepository.save(recipeIngredient));
     }
 
 }

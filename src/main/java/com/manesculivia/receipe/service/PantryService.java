@@ -30,6 +30,7 @@ public class PantryService {
     }
 
     public PantryIngredient add(IngredientRequestDto ingredientRequestDto) {
+        validateQuantity(ingredientRequestDto.getQuantity());
         Optional<PantryIngredient> optionalIngredient = pantryRepository.findByIngredientNameIgnoreCase(ingredientRequestDto.getName());
         PantryIngredient pantryIngredient;
         if (optionalIngredient.isPresent()) {
@@ -45,15 +46,19 @@ public class PantryService {
     }
 
     public PantryIngredient updateQuantity(Integer id, Integer quantity) {
-        if (quantity <= 0) {
-            throw new NegativeQuantityException(format("Invalid quantity: {0}. Quantity must me at least 1.", quantity));
-        }
+        validateQuantity(quantity);
         Optional<PantryIngredient> ingredient = pantryRepository.findById(id);
         if (ingredient.isEmpty()) {
             throw new NotFoundException(format("Not found ingredient with id {0}", id));
         }
         ingredient.get().setIngredientQuantity(quantity);
         return pantryRepository.save(ingredient.get());
+    }
+
+    private void validateQuantity(Integer quantity) {
+        if (quantity <= 0) {
+            throw new NegativeQuantityException(format("Invalid quantity: {0}. Quantity must me at least 1.", quantity));
+        }
     }
 
     public void delete(Integer id) {

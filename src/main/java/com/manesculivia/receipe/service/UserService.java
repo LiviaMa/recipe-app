@@ -1,7 +1,7 @@
 package com.manesculivia.receipe.service;
 
 import com.manesculivia.receipe.exception.UserRoleNotSupportedException;
-import com.manesculivia.receipe.exception.UsernameAlreadyExistsException;
+import com.manesculivia.receipe.exception.AlreadyExistsException;
 import com.manesculivia.receipe.model.User;
 import com.manesculivia.receipe.model.request.UserRequestDto;
 import com.manesculivia.receipe.repository.RoleRepository;
@@ -36,14 +36,14 @@ public class UserService implements UserDetailsService {
         user.setUsername(userRequestDto.getUsername());
         user.setPassword(passwordEncoder.encode(userRequestDto.getPassword()));
         roleRepository.findRoleByName(roleName)
-                .ifPresent(r -> user.setAuthorities(singletonList(r)));
+                .ifPresent(r -> user.setRoles(singletonList(r)));
 
         return userRepository.save(user);
     }
 
     private void validateUserDetails(UserRequestDto userRequestDto) {
         if (userRepository.findByUsername(userRequestDto.getUsername()).isPresent()) {
-            throw new UsernameAlreadyExistsException(format("{0} is already used", userRequestDto.getUsername()));
+            throw new AlreadyExistsException(format("{0} is already used", userRequestDto.getUsername()));
         }
         if (roleRepository.findRoleByName(userRequestDto.getRole()).isEmpty()) {
             throw new UserRoleNotSupportedException(format("{0} is not supported. Only {1} are supported",
