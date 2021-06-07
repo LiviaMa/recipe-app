@@ -10,6 +10,9 @@ import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
+import static org.springframework.http.HttpMethod.GET;
+import static org.springframework.http.HttpMethod.POST;
+
 @Configuration
 @EnableWebSecurity
 @RequiredArgsConstructor
@@ -34,11 +37,12 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 .and()
                 .authorizeRequests()
-                .mvcMatchers("/users/**").permitAll()
-                // TODO to be changed
-//                .mvcMatchers("/ingredients/**").hasRole("ADMIN")))
-                .mvcMatchers("pantry/ingredients/**").permitAll()
-                .mvcMatchers("/recipes/**").permitAll()
+                .mvcMatchers(POST, "/users/**").permitAll()
+                .mvcMatchers("/users/**").hasRole("ADMIN")
+                .mvcMatchers(GET, "/recipes/public").permitAll()
+                .mvcMatchers("/recipes/public").hasAnyRole("COOK", "ADMIN")
+                .mvcMatchers("/recipes/private/**").hasRole("COOK")
+                .mvcMatchers("/pantry/**").hasRole("COOK")
                 .anyRequest().authenticated();
     }
 
