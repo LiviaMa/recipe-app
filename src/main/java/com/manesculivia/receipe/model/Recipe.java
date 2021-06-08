@@ -1,7 +1,6 @@
 package com.manesculivia.receipe.model;
 
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
 import javax.persistence.*;
 import java.util.List;
@@ -10,6 +9,10 @@ import java.util.List;
 @Table(name = "recipes")
 @Getter
 @Setter
+@Builder(toBuilder = true)
+@AllArgsConstructor
+@NoArgsConstructor
+@ToString(exclude = "id")
 public class Recipe {
 
     @Id
@@ -28,9 +31,10 @@ public class Recipe {
 
     private String createdBy;
 
+    // TODO fix delete operation on private recipe
     @ManyToMany(cascade = CascadeType.ALL)
-    @JoinTable(name = "recipes_ingredients",
-            joinColumns = @JoinColumn(name = "recipe_id"),
-            inverseJoinColumns = @JoinColumn(name = " ingredient_id"))
-    private List<Ingredient> ingredients;
+    @JoinTable(name = "recipes_recipe_ingredients",
+            joinColumns = @JoinColumn(name = "recipe_id", referencedColumnName = "id"),
+            inverseJoinColumns = @JoinColumn(name = "recipe_ingredients_id", referencedColumnName = "id"))
+    private List<RecipeIngredient> recipeIngredients;
 }

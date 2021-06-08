@@ -2,19 +2,21 @@ package com.manesculivia.receipe.model;
 
 import lombok.Getter;
 import lombok.Setter;
+import lombok.ToString;
 
 import javax.persistence.*;
 
 @Entity
-@Table(name = "ingredients")
+@Table(name = "roles")
 @Getter
 @Setter
-public class Ingredient {
+@ToString(exclude = "id")
+public class Role {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    private Integer quantity;
+    private String name;
 
 }
